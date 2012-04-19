@@ -1,0 +1,25 @@
+options:
+  collate: utf8_unicode_ci
+  charset: utf8
+
+sfAlohaContent:
+  actAs:
+    - Timestampable
+    - Versionable
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+      unsigned: true
+      notnull: true
+    element_id:
+      type: string(255)
+      notnull: true
+    body:
+      type: string(65535)
+      notnull: true
+  indexes:
+    element_id_index:
+      fields: [element_id]
+
