@@ -2,7 +2,7 @@ options:
   collate: utf8_unicode_ci
   charset: utf8
 
-sfAlohaContent:
+AlohaContent:
   actAs:
     - Timestampable
     - Versionable
