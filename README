@@ -18,7 +18,7 @@ Aloha plugins are included to save the content (and upload pictures in a near fu
   
         git clone git@github.com:Justpassingby/sfAlohaPlugin.git plugins/sfAlohaPlugin
   
-  * Activate the plugin in the `config/ProjectConfiguration.class.php`
+  * Activate the plugin in `config/ProjectConfiguration.class.php`
   
         [php]
         class ProjectConfiguration extends sfProjectConfiguration
@@ -33,12 +33,12 @@ Aloha plugins are included to save the content (and upload pictures in a near fu
           }
         }
         
-  * Rebuild your model
+  * Rebuild the model
 
         ./symfony doctrine:build-model
         ./symfony doctrine:build-sql
         
-  * Update you database tables (beware that it deletes all tables and create them from scratch):
+  * Update database tables (Beware! All tables will be deleted and created again from scratch):
 
         ./symfony doctrine:insert-sql
 
