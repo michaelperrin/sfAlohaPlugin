@@ -28,8 +28,6 @@ function aloha_init_page(array $activatedPlugins = null)
     );
   }
 
-  $user = sfContext::getInstance()->getUser();
-
   // TODO : check for projects installed in subdir
   use_javascript(
     '/sfAlohaPlugin/lib/aloha-editor/lib/aloha.js',
