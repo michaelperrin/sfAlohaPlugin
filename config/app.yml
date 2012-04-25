@@ -16,3 +16,5 @@ all:
       - common/table
       - common/align
       - sfAloha/save
+    autoAdd: true # Tells whether new content can be automatically created or not
+

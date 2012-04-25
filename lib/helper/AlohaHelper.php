@@ -11,7 +11,8 @@
  */
 function aloha_init_page(array $activatedPlugins = null)
 {
-  if ($activatedPlugins === null) {
+  if ($activatedPlugins === null)
+  {
   	// Load default activated plugins
   	
     $activatedPlugins = sfConfig::get('app_aloha_defaultPlugins');
@@ -43,15 +44,26 @@ function aloha_render_element($elementId)
 {
   $content = AlohaContentTable::getInstance()->findOneByElementId($elementId);
 
-  if (!$content) {
-    return;
+  if (!$content)
+  {
+    $autoAdd = sfConfig::get('app_aloha_autoAdd');
+    
+    if ($autoAdd === true)
+    {
+      $content = new AlohaContent();
+      $content->setElementId($elementId)
+              ->save();
+    }
+    else
+    {
+      // Do not render anything if the element doesn't exist without "auto add" option
+      return '';
+    }
   }
 
   $result = sprintf('<div id="%s" class="editable">', $content->getId());
 
-  if ($content) {
-    $result .= $content->getBody();
-  }
+  $result .= $content->getBody();
 
   $result .= '</div>';
 
