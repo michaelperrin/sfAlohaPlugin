@@ -12,20 +12,9 @@
 function aloha_init_page(array $activatedPlugins = null)
 {
   if ($activatedPlugins === null) {
-    $activatedPlugins = array(
-      'common/format',
-      'common/list',
-      'common/link',
-      'common/highlighteditables',
-      'common/block',
-      'common/undo',
-      'common/contenthandler',
-      'common/paste',
-      'common/commands',
-      'common/table',
-      'common/align',
-      'sfAloha/save',
-    );
+  	// Load default activated plugins
+  	
+    $activatedPlugins = sfConfig::get('app_aloha_defaultPlugins');
   }
 
   // TODO : check for projects installed in subdir
@@ -36,7 +25,6 @@ function aloha_init_page(array $activatedPlugins = null)
   );
 
   use_javascript('/sfAlohaPlugin/js/sfAlohaPlugin.js', 'last');
-
   use_stylesheet('/sfAlohaPlugin/lib/aloha-editor/css/aloha.css');
 
   $result = '<input type="hidden" id="aloha-save-url" value="' . url_for('@aloha_content_save') . '" />';

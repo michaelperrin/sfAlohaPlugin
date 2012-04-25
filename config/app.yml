@@ -1,0 +1,18 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+all:
+  aloha:
+    defaultPlugins:
+      - common/format
+      - common/list
+      - common/link
+      - common/highlighteditables
+      - common/block
+      - common/undo
+      - common/contenthandler
+      - common/paste
+      - common/commands
+      - common/table
+      - common/align
+      - sfAloha/save
