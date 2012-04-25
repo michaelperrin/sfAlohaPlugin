@@ -74,3 +74,12 @@ Aloha plugins are included to save the content (and upload pictures in a near fu
         <?php echo aloha_render_element('My Content'); ?>
   
   * Now you can test your page, hover the mouse cursor on the div element, edit it, and click the save button in the Aloha editor toolbar :)
+
+
+## Configuration
+
+  * The configuration is done in the plugin's ``config/app.yml`` file, in the ``aloha`` section
+  
+  * ``defaultPlugins``: tells which Aloha plugins to load when calling the ``aloha_init_page`` helper function
+  
+  * ``autoAdd``: tells whether new empty content should be automatically created when it doesn't exist yet
