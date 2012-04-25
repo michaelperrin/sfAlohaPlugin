@@ -12,7 +12,7 @@ Aloha plugins are included to save the content (and upload pictures in a near fu
   
   * Install the plugin (via a package)
 
-        ./symfony plugin:install sfAlohaPlugin
+        ./symfony plugin:install --stability=beta sfAlohaPlugin
   
   * Install the plugin (via Git):
   
