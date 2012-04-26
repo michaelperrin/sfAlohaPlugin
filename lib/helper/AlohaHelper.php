@@ -13,8 +13,8 @@ function aloha_init_page(array $activatedPlugins = null)
 {
   if ($activatedPlugins === null)
   {
-  	// Load default activated plugins
-  	
+    // Load default activated plugins
+
     $activatedPlugins = sfConfig::get('app_aloha_defaultPlugins');
   }
 
@@ -30,7 +30,12 @@ function aloha_init_page(array $activatedPlugins = null)
 
   $result = '<input type="hidden" id="aloha-save-url" value="' . url_for('@aloha_content_save') . '" />';
   $result .= '<script type="text/javascript">AlohaEditor.init();</script>';
-  
+
+  if (array_search('sfAloha/image-upload', $activatedPlugins))
+  {
+    $result .= '<input type="hidden" id="aloha-image-upload-form-url" value="' . url_for('aloha_upload_file') . '"/>';
+  }
+
   return $result;
 }
 
@@ -47,7 +52,7 @@ function aloha_render_element($elementId)
   if (!$content)
   {
     $autoAdd = sfConfig::get('app_aloha_autoAdd');
-    
+
     if ($autoAdd === true)
     {
       $content = new AlohaContent();
