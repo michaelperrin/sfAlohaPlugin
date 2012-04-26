@@ -30,7 +30,7 @@ class sfAlohaContentActions extends sfActions
 
     return $this->renderText('');
   }
-  
+
   /**
    * Upload file action
    *
@@ -38,32 +38,28 @@ class sfAlohaContentActions extends sfActions
    */
   public function executeUploadFile(sfWebRequest $request)
   {
-    $error = $_FILES['image']['error'];
-    $alohaUploadDir = sfConfig::get('app_aloha_image_upload_dir');
+    $imageUploadForm = new sfAlohaImageUploadForm();
 
-    if ($error == UPLOAD_ERR_OK)
-    {
-      $fileName = $_FILES['image']['name'];
+    $values = $request->getParameter('sf_aloha_image_upload');
+    $files = $request->getFiles('sf_aloha_image_upload');
 
-      $newFilePath = implode(
-        DIRECTORY_SEPARATOR,
-        array(
-          sfConfig::get('sf_upload_dir'),
-          $alohaUploadDir,
-          $fileName
-        )
+    $result = array();
+
+    $imageUploadForm->bind($values, $files);
+
+    if ($imageUploadForm->isValid()) {
+      $image = $imageUploadForm->getValue('image');
+      $imageName = $image->save();
+
+      $imagePath = sprintf(
+          '%s/uploads/%s/%s',
+          $request->getRelativeUrlRoot(),
+          sfConfig::get('app_aloha_image_upload_dir'),
+          $imageName
       );
 
-      move_uploaded_file($_FILES['image']['tmp_name'], $newFilePath);
+      $result = array('imageUrl' => $imagePath);
     }
-
-    $result = array(
-      'imageUrl' => sprintf(
-        '/uploads/%s/%s',
-        $alohaUploadDir,
-        $fileName
-      )
-    );
 
     $this->getResponse()->setContentType('application/json');
     return $this->renderText(json_encode($result));

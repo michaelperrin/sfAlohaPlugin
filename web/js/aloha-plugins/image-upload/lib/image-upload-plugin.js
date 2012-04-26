@@ -9,6 +9,8 @@ function(Aloha, jQuery, Plugin, FloatingMenu) {
     "use strict";
 
     return Plugin.create( 'image-upload', {
+        formData: null,
+
         /**
          * Initalization executed on plugin load
          */
@@ -53,11 +55,11 @@ function(Aloha, jQuery, Plugin, FloatingMenu) {
          * Inits image upload element
          */
         initImageUpload: function() {
-            var formData = false;
             var that = this;
+            that.formData = false;
 
             if (window.FormData) {
-                formData = new FormData();
+                that.formData = new FormData();
             }
 
             jQuery("#sf_aloha_image_upload_image").change(function () {
@@ -71,17 +73,22 @@ function(Aloha, jQuery, Plugin, FloatingMenu) {
                             reader = new FileReader();
                             reader.readAsDataURL(file);
                         }
-                        if (formData) {
-                            formData.append("image", file);
+                        if (that.formData) {
+                            that.formData.append(jQuery(this).attr("name"), file);
                         }
                     }
                 }
 
-                if (formData) {
+                // Add other fields from the same form (such as CSRF protection)
+                jQuery(this).parents("form").find("input[type=hidden]").each(function() {
+                  that.formData.append(jQuery(this).attr("name"), jQuery(this).val());
+                });
+
+                if (that.formData) {
                     jQuery.ajax({
                         url: jQuery("#aloha-image-upload-form").attr("action"),
                         type: "POST",
-                        data: formData,
+                        data: that.formData,
                         processData: false,
                         contentType: false,
                         success: function (data) { that.showUploadedItem(data.imageUrl); },
