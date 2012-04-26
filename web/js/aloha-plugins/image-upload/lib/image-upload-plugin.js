@@ -9,13 +9,18 @@ function(Aloha, jQuery, Plugin, FloatingMenu) {
     "use strict";
 
     return Plugin.create( 'image-upload', {
+        /**
+         * Initalization executed on plugin load
+         */
         init: function() {
-            // Executed on plugin initialization
             this.createButtons();
             this.initImageUpload();
         },
 
-        createButtons: function () {
+        /**
+         * Adds button to the Aloha ribbon
+         */
+        createButtons: function() {
             var that = this;
 
             // create a new button
@@ -36,47 +41,17 @@ function(Aloha, jQuery, Plugin, FloatingMenu) {
             );
         },
 
+        /**
+         * Image button click
+         */
         insertImageButtonClick: function() {
-            this.initUploadForm();
-
-            jQuery('#aloha-image-upload-form input[name="image"]').click();
+            // Simulate click on the form file input element
+            jQuery('#sf_aloha_image_upload_image').click();
         },
 
         /**
-         * Inits upload form
+         * Inits image upload element
          */
-        initUploadForm: function() {
-
-          console.log("setse");
-            var formElt = jQuery("#aloha-image-upload-form");
-
-            if (formElt.size() == 1) {
-                // The form has already been initialized
-                return;
-            }
-
-            formElt = jQuery('<form method="post" enctype="multipart/form-data" id="aloha-image-upload-form"></form>');
-            formElt.attr('action', jQuery('#aloha-image-upload-form-url').val());
-
-            var inputFileElt    = jQuery('<input type="file" name="image"/>');
-            var submitElt       = jQuery('<button type="submit"></button>');
-
-            inputFileElt.appendTo(formElt);
-            submitElt.appendTo(formElt);
-
-            formElt.css({
-                "visibility": "hidden",
-                "height": "0",
-                "width": "0",
-                "overflow": "hidden",
-            });
-
-            formElt.insertAfter(jQuery('#' + Aloha.activeEditable.getId()));
-
-            this.initImageUpload();
-        },
-
-        // TODO : jsdoc
         initImageUpload: function() {
             var formData = false;
             var that = this;
@@ -85,13 +60,12 @@ function(Aloha, jQuery, Plugin, FloatingMenu) {
                 formData = new FormData();
             }
 
-            jQuery('#aloha-image-upload-form input[name="image"]').change(function () {
+            jQuery("#sf_aloha_image_upload_image").change(function () {
                 var i = 0, len = this.files.length, img, reader, file;
 
                 if (len >= 1) {
                     file = this.files[0];
 
-                    // TODO : check
                     if (!!file.type.match(/image.*/)) {
                         if ( window.FileReader ) {
                             reader = new FileReader();
@@ -117,12 +91,16 @@ function(Aloha, jQuery, Plugin, FloatingMenu) {
             });
         },
 
-        // TODO : jsdoc
+        /**
+         * Displays the uploaded image
+         *
+         * @param string fileName name of the file to insert
+         */
         showUploadedItem: function(fileName) {
             var range = Aloha.Selection.getRangeObject();
             if (Aloha.activeEditable) {
-                // TODO : change
-                var img = jQuery('<p><img src="' + fileName + '"/></p>');
+                var img = jQuery("<img />").attr("src", fileName);
+
                 GENTICS.Utils.Dom.insertIntoDOM(
                     img,
                     range,

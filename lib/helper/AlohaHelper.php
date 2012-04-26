@@ -33,8 +33,45 @@ function aloha_init_page(array $activatedPlugins = null)
 
   if (array_search('sfAloha/image-upload', $activatedPlugins))
   {
-    $result .= '<input type="hidden" id="aloha-image-upload-form-url" value="' . url_for('aloha_upload_file') . '"/>';
+    $result .= aloha_init_upload_image_plugin();
   }
+
+  return $result;
+}
+
+/**
+ * Inits image upload plugin
+ *
+ * @return string
+ */
+function aloha_init_upload_image_plugin()
+{
+  static $initializedImageUploadPlugin;
+
+  if (isset($initializedImageUploadPlugin))
+  {
+    // The image upload plugin has already been initialized. No need to do it twice
+    return '';
+  }
+
+  $initializedImageUploadPlugin = true;
+
+  $form = new sfAlohaImageUploadForm();
+
+  $result = $form->renderFormTag(
+    url_for('aloha_upload_file'),
+    array('id' => 'aloha-image-upload-form')
+  );
+
+  $result .= $form->render(
+    array(
+      'action'  => url_for('aloha_upload_file'),
+      'enctype' => 'multipart/form-data',
+      'id'      => 'aloha-image-upload-form'
+    )
+  );
+
+  $result .= '</form>';
 
   return $result;
 }
