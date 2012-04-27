@@ -13,12 +13,11 @@ function aloha_init_page(array $activatedPlugins = null)
 {
   if ($activatedPlugins === null)
   {
-  	// Load default activated plugins
-  	
+    // Load default activated plugins
+
     $activatedPlugins = sfConfig::get('app_aloha_defaultPlugins');
   }
 
-  // TODO : check for projects installed in subdir
   use_javascript(
     '/sfAlohaPlugin/lib/aloha-editor/lib/aloha.js',
     'last',
@@ -27,10 +26,53 @@ function aloha_init_page(array $activatedPlugins = null)
 
   use_javascript('/sfAlohaPlugin/js/sfAlohaPlugin.js', 'last');
   use_stylesheet('/sfAlohaPlugin/lib/aloha-editor/css/aloha.css');
+  use_stylesheet('/sfAlohaPlugin/css/sfAlohaPlugin.css');
 
   $result = '<input type="hidden" id="aloha-save-url" value="' . url_for('@aloha_content_save') . '" />';
   $result .= '<script type="text/javascript">AlohaEditor.init();</script>';
-  
+
+  if (array_search('sfAloha/image-upload', $activatedPlugins))
+  {
+    $result .= aloha_init_upload_image_plugin();
+  }
+
+  return $result;
+}
+
+/**
+ * Inits image upload plugin
+ *
+ * @return string
+ */
+function aloha_init_upload_image_plugin()
+{
+  static $initializedImageUploadPlugin;
+
+  if (isset($initializedImageUploadPlugin))
+  {
+    // The image upload plugin has already been initialized. No need to do it twice
+    return '';
+  }
+
+  $initializedImageUploadPlugin = true;
+
+  $form = new sfAlohaImageUploadForm();
+
+  $result = $form->renderFormTag(
+    url_for('aloha_upload_file'),
+    array('id' => 'aloha-image-upload-form')
+  );
+
+  $result .= $form->render(
+    array(
+      'action'  => url_for('aloha_upload_file'),
+      'enctype' => 'multipart/form-data',
+      'id'      => 'aloha-image-upload-form'
+    )
+  );
+
+  $result .= '</form>';
+
   return $result;
 }
 
@@ -47,7 +89,7 @@ function aloha_render_element($elementId)
   if (!$content)
   {
     $autoAdd = sfConfig::get('app_aloha_autoAdd');
-    
+
     if ($autoAdd === true)
     {
       $content = new AlohaContent();

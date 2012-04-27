@@ -4,3 +4,7 @@
 aloha_content_save:
   url:   /aloha/content/save
   param: { module: sfAlohaContent, action: save }
+
+aloha_upload_file:
+  url:   /aloha/upload-file
+  param: { module: sfAlohaContent, action: uploadFile  }

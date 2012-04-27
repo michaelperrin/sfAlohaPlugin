@@ -16,5 +16,6 @@ all:
       - common/table
       - common/align
       - sfAloha/save
+      - sfAloha/image-upload
     autoAdd: true # Tells whether new content can be automatically created or not
-
+    image_upload_dir: aloha-images

@@ -1,0 +1,6 @@
+#aloha-image-upload-form {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
