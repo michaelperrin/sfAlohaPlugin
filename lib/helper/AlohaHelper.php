@@ -18,7 +18,6 @@ function aloha_init_page(array $activatedPlugins = null)
     $activatedPlugins = sfConfig::get('app_aloha_defaultPlugins');
   }
 
-  // TODO : check for projects installed in subdir
   use_javascript(
     '/sfAlohaPlugin/lib/aloha-editor/lib/aloha.js',
     'last',
@@ -27,6 +26,7 @@ function aloha_init_page(array $activatedPlugins = null)
 
   use_javascript('/sfAlohaPlugin/js/sfAlohaPlugin.js', 'last');
   use_stylesheet('/sfAlohaPlugin/lib/aloha-editor/css/aloha.css');
+  use_stylesheet('/sfAlohaPlugin/css/sfAlohaPlugin.css');
 
   $result = '<input type="hidden" id="aloha-save-url" value="' . url_for('@aloha_content_save') . '" />';
   $result .= '<script type="text/javascript">AlohaEditor.init();</script>';
