@@ -6,17 +6,18 @@ This plugin makes it very easy to turn any HTML element within a template into a
 Aloha plugins are included to save the content and upload pictures. The plugin can therefore be used to turn a symfony application into a very basic CMS.
 
 
-## Features
+## Features and main benefits of using Aloha Editor
 
   * Very easy integration of Aloha Editor using a helper
   * Intuitive way to edit web site content in a real WYSIWYG way: the styles in the editor (headers, lists, ...) are the one of the real website.
-  * You therefore define you own styles in a stylesheet file. The user will therefore not have the possibility to change too much the style of the content and turn the website "according to his tastes"
+  * Define you own styles in a stylesheet file. The user will therefore not have the possibility to change too much the content's style and change the website "according to his tastes"
   * Save content in database (with versioning enabled)
   * Upload images
 
 ## Planned features
 
   * ACL (only allow some users to edit content)
+  * Symfony2 bundle
 
 ## Installation
 
@@ -26,7 +27,7 @@ Aloha plugins are included to save the content and upload pictures. The plugin c
 
         ./symfony plugin:install --stability=beta sfAlohaPlugin
 
-  * Install the plugin (via Git):
+  * Or install the plugin (via Git, which is the preferred way):
 
         git clone git@github.com:Justpassingby/sfAlohaPlugin.git plugins/sfAlohaPlugin
 
@@ -59,6 +60,17 @@ Aloha plugins are included to save the content and upload pictures. The plugin c
         ./symfony plugin:publish-assets
 
 
+## Configuration
+
+  * The configuration is done in the plugin's ``config/app.yml`` file, in the ``aloha`` section
+
+  * ``defaultPlugins``: tells which Aloha plugins to load when calling the ``aloha_init_page`` helper function
+
+  * ``autoAdd``: tells whether new empty content should be automatically created when it doesn't exist yet
+
+  * ``image_upload_dir``: tells in which subfolder of the ``web/uploads`` folder images will be uploaded
+
+
 ## Add editable content to a page
 
 ### With autoAdd
@@ -86,14 +98,3 @@ Aloha plugins are included to save the content and upload pictures. The plugin c
         <?php echo aloha_render_element('My Content'); ?>
 
   * Now you can test your page, hover the mouse cursor on the div element, edit it, and click the save button in the Aloha editor toolbar :)
-
-
-## Configuration
-
-  * The configuration is done in the plugin's ``config/app.yml`` file, in the ``aloha`` section
-
-  * ``defaultPlugins``: tells which Aloha plugins to load when calling the ``aloha_init_page`` helper function
-
-  * ``autoAdd``: tells whether new empty content should be automatically created when it doesn't exist yet
-
-  * ``image_upload_dir``: tells in which subfolder of the ``web/uploads`` folder images will be uploaded
