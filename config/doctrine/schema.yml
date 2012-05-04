@@ -13,13 +13,13 @@ AlohaContent:
       autoincrement: true
       unsigned: true
       notnull: true
-    element_id:
+    name:
       type: string(255)
       notnull: true
     body:
       type: string(65535)
       notnull: true
   indexes:
-    element_id_index:
-      fields: [element_id]
+    name_index:
+      fields: [name]
 

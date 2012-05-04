@@ -79,12 +79,12 @@ function aloha_init_upload_image_plugin()
 /**
  * Renders Aloha content
  *
- * @param string $elementId
+ * @param string $name
  * @return string
  */
-function aloha_render_element($elementId)
+function aloha_render_element($name)
 {
-  $content = AlohaContentTable::getInstance()->findOneByElementId($elementId);
+  $content = AlohaContentTable::getInstance()->findOneByName($name);
 
   if (!$content)
   {
@@ -93,7 +93,7 @@ function aloha_render_element($elementId)
     if ($autoAdd === true)
     {
       $content = new AlohaContent();
-      $content->setElementId($elementId)
+      $content->setName($name)
               ->save();
     }
     else
