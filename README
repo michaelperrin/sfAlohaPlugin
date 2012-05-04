@@ -12,6 +12,7 @@ Aloha plugins are included to save the content and upload pictures. The plugin c
   * Intuitive way to edit web site content in a real WYSIWYG way: the styles in the editor (headers, lists, ...) are the one of the real website.
   * Define you own styles in a stylesheet file. The user will therefore not have the possibility to change too much the content's style and change the website "according to his tastes"
   * Save content in database (with versioning enabled)
+  * System to implement several content saving backends (see configuration), using the DataMapper design pattern
   * Upload images
 
 ## Planned features
@@ -69,6 +70,8 @@ Aloha plugins are included to save the content and upload pictures. The plugin c
   * ``autoAdd``: tells whether new empty content should be automatically created when it doesn't exist yet
 
   * ``image_upload_dir``: tells in which subfolder of the ``web/uploads`` folder images will be uploaded
+
+  * ``backend`` (default value: sfAlohaBackendDoctrine): defines the backend used to save content (i.e. how Aloha content is persisted)
 
 
 ## Add editable content to a page

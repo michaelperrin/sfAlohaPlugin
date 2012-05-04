@@ -79,22 +79,23 @@ function aloha_init_upload_image_plugin()
 /**
  * Renders Aloha content
  *
- * @param string $elementId
+ * @param string $name
  * @return string
  */
-function aloha_render_element($elementId)
+function aloha_render_element($name)
 {
-  $content = AlohaContentTable::getInstance()->findOneByElementId($elementId);
+  $aloha = sfAloha::getInstance();
+  $alohaContent = $aloha->getContentByName($name);
 
-  if (!$content)
+  if (!$alohaContent)
   {
     $autoAdd = sfConfig::get('app_aloha_autoAdd');
 
     if ($autoAdd === true)
     {
-      $content = new AlohaContent();
-      $content->setElementId($elementId)
-              ->save();
+      $alohaContent = new sfAlohaContent();
+      $alohaContent->setName($name);
+      $aloha->saveContent($alohaContent);
     }
     else
     {
@@ -103,9 +104,9 @@ function aloha_render_element($elementId)
     }
   }
 
-  $result = sprintf('<div id="%s" class="editable">', $content->getId());
+  $result = sprintf('<div data-name="%s" class="editable">', esc_specialchars($alohaContent->getName()));
 
-  $result .= $content->getBody();
+  $result .= $alohaContent->getBody();
 
   $result .= '</div>';
 

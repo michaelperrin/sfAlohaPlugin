@@ -9,7 +9,7 @@ class alohaCreateContentTask extends sfBaseTask
       new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
       new sfCommandOption('connection', null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', 'doctrine'),
     ));
-    
+
     $this->addArgument('content_name', sfCommandArgument::REQUIRED, 'Content name to add');
 
     $this->namespace        = 'aloha';
@@ -30,11 +30,11 @@ EOF;
     $connection = $databaseManager->getDatabase($options['connection'])->getConnection();
 
     $contentName = $arguments['content_name'];
-    
+
     $content = new AlohaContent();
-    $content->setElementId($contentName)
+    $content->setName($contentName)
             ->save();
-    
+
     printf("Content named %s successfully created.\n", $contentName);
   }
 }

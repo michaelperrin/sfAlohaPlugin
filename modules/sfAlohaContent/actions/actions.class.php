@@ -12,21 +12,21 @@ class sfAlohaContentActions extends sfActions
    */
   public function executeSave(sfWebRequest $request)
   {
-    $id     = $request->getParameter('id');
+    $name   = $request->getParameter('name');
     $body   = $request->getParameter('body');
 
-    if (!$id || !$body)
+    if (!$name || !$body)
     {
       $this->forward404();
     }
 
-    // Get the existing content or create a new one
-    $alohaContent = AlohaContentTable::getInstance()->findOneById($id);
+    $aloha = sfAloha::getInstance();
+    $alohaContent = $aloha->getContentByName($name);
 
     $this->forward404Unless($alohaContent);
 
     $alohaContent->setBody($body);
-    $alohaContent->save();
+    $aloha->saveContent($alohaContent);
 
     return $this->renderText('');
   }

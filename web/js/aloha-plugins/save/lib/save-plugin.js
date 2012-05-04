@@ -15,6 +15,9 @@ define( [
             var that = this;
         },
 
+        /**
+         * Creates buttons in toolbar
+         */
         createButtons: function () {
             var that = this;
 
@@ -36,14 +39,17 @@ define( [
             );
         },
 
+        /**
+         * Sends content to save
+         */
         save: function () {
             var params = {
-                id:         Aloha.activeEditable.getId(),
+                name:       Aloha.activeEditable.obj.data("name"),
                 body:       Aloha.activeEditable.getContents()
             };
 
             var saveUrl = jQuery("#aloha-save-url").val();
-            
+
             if (saveUrl === "") {
                 return;
             }
