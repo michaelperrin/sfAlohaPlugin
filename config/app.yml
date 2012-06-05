@@ -17,6 +17,18 @@ all:
       - common/align
       - sfAloha/save
       - sfAloha/image-upload
-    autoAdd: true # Tells whether new content can be automatically created or not
-    image_upload_dir: aloha-images
-    backend: sfAlohaBackendDoctrine
+
+    # Tells whether new content can be automatically created or not
+    autoAdd:                              true
+
+    image_upload_dir:                     aloha-images
+    backend:                              sfAlohaBackendDoctrine
+
+    security:
+      edit:
+        # Tells whether only authenticated users can edit content or not
+        authenticated:                    true
+
+        # Tells whether only users with the given credential(s) can edit content or not
+        # ~ for no specific credentials, a table for several allowed credentials (e.g. [admin, writer]), string for only one
+        credentials:                      ~

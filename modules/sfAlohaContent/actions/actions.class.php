@@ -5,6 +5,11 @@
  */
 class sfAlohaContentActions extends sfActions
 {
+  public function preExecute()
+  {
+    $this->_checkSecurity();
+  }
+
   /**
    * Save content action
    *
@@ -111,5 +116,13 @@ class sfAlohaContentActions extends sfActions
     } while (file_exists($newFilePath));
 
     return $newFileName;
+  }
+
+  /**
+   * Checks if the current user is allowed to edit content
+   */
+  protected function _checkSecurity()
+  {
+    $this->forward404Unless(sfAloha::getInstance()->checkAccess());
   }
 }

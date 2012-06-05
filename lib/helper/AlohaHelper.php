@@ -11,10 +11,16 @@
  */
 function aloha_init_page(array $activatedPlugins = null)
 {
+  if (!sfAloha::getInstance()->checkAccess())
+  {
+    // The user doesn't have credentials to edit content.
+    // No need to load the Aloha Editor library
+    return '';
+  }
+
   if ($activatedPlugins === null)
   {
     // Load default activated plugins
-
     $activatedPlugins = sfConfig::get('app_aloha_defaultPlugins');
   }
 
@@ -33,6 +39,7 @@ function aloha_init_page(array $activatedPlugins = null)
 
   if (array_search('sfAloha/image-upload', $activatedPlugins))
   {
+    // Image upload plugin is activated
     $result .= aloha_init_upload_image_plugin();
   }
 
