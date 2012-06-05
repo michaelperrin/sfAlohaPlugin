@@ -73,12 +73,11 @@ Aloha plugins are included to save the content and upload pictures. The plugin c
 
   * ``backend`` (default value: sfAlohaBackendDoctrine): defines the backend used to save content (i.e. how Aloha content is persisted)
 
-``security``
-: options to allow edit for specific users based on the their authentication status or credentials
-: ``authenticated`` (``true`` or ``false``)
-  : tells whether only authenticated users can edit content or not
-: ``credentials`` (``~``, string, array)
-  : tells whether only users with the given credential(s) can edit content or not (e.g. ``[admin, writer]``)
+  * ``security``: options to allow edit for specific users based on the their authentication status or credentials
+
+   * ``authenticated`` (``true`` or ``false``): tells whether only authenticated users can edit content or not
+
+   * ``credentials`` (``~``, string, array): tells whether only users with the given credential(s) can edit content or not (e.g. ``[admin, writer]``)
 
 
 ## Add editable content to a page
