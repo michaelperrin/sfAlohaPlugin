@@ -29,7 +29,7 @@ Aloha plugins are included to save the content and upload pictures. The plugin c
 
   * Or install the plugin (via Git, which is the preferred way):
 
-        git clone git@github.com:Justpassingby/sfAlohaPlugin.git plugins/sfAlohaPlugin
+        git clone git@github.com:michaelperrin/sfAlohaPlugin.git plugins/sfAlohaPlugin
 
   * Activate the plugin in `config/ProjectConfiguration.class.php`
 
