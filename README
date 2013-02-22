@@ -47,14 +47,13 @@ Aloha plugins are included to save the content and upload pictures. The plugin c
 
   * Activate module in your app's settings file (e.g `apps/frontend/config/settings.yml`)
 
-        [yaml]
-        all:
-          .settings:
-            # ...
+    all:
+      .settings:
+        # ...
 
-            enabled_modules:
-              # ...
-              - sfAlohaContent
+        enabled_modules:
+          # ...
+          - sfAlohaContent
 
 
   * Rebuild the model
