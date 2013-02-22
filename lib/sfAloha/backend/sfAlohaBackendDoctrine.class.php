@@ -28,7 +28,7 @@ class sfAlohaBackendDoctrine extends sfAlohaBackendAbstract
     // Get the existing content or create a new one
     $doctrineAlohaContent = AlohaContentTable::getInstance()->findOneByName($alohaContent->getName());
 
-    if (!$alohaContent)
+    if (!$doctrineAlohaContent)
     {
       $doctrineAlohaContent = new AlohaContent();
       $doctrineAlohaContent->setName($alohaContent->getName());
