@@ -46,6 +46,18 @@ Aloha plugins are included to save the content and upload pictures. The plugin c
           }
         }
 
+  * Activate module in your app's settings file (e.g `apps/frontend/config/settings.yml`)
+
+        [yaml]
+        all:
+          .settings:
+            # ...
+
+            enabled_modules:
+              # ...
+              - sfAlohaContent
+
+
   * Rebuild the model
 
         ./symfony doctrine:build-model
@@ -59,10 +71,50 @@ Aloha plugins are included to save the content and upload pictures. The plugin c
 
         ./symfony plugin:publish-assets
 
+  * Clear symfony cache
+
+        ./symfony cc
+
 
 ## Configuration
 
-  * The configuration is done in the plugin's ``config/app.yml`` file, in the ``aloha`` section
+Default configuration values are defined in the the plugin's ``config/app.yml`` file:
+
+        [yaml]
+        all:
+          aloha:
+            defaultPlugins:
+              - common/format
+              - common/list
+              - common/link
+              - common/highlighteditables
+              - common/block
+              - common/undo
+              - common/contenthandler
+              - common/paste
+              - common/commands
+              - common/table
+              - common/align
+              - sfAloha/save
+              - sfAloha/image-upload
+
+            # Tells whether new content can be automatically created or not
+            autoAdd:                              true
+
+            image_upload_dir:                     aloha-images
+            backend:                              sfAlohaBackendDoctrine
+
+            security:
+              edit:
+                # Tells whether only authenticated users can edit content or not
+                authenticated:                    true
+
+                # Tells whether only users with the given credential(s) can edit content or not
+                # ~ for no specific credentials, a table for several allowed credentials (e.g. [admin, writer]), string for only one
+                credentials:                      ~
+
+
+You can override these parameters in your application ``app.yml`` file (e.g. in ``apps/frontend/config/app.yml``):
 
   * ``defaultPlugins``: tells which Aloha plugins to load when calling the ``aloha_init_page`` helper function
 
