@@ -15,23 +15,22 @@ Aloha plugins are included to save the content and upload pictures. The plugin c
   * System to implement several content saving backends (see configuration), using the DataMapper design pattern
   * Upload images
 
-## Planned features
-
-  * Symfony2 bundle
-
 ## Installation
 
   * Go to your symfony project's root directory
 
   * Install the plugin (via a package)
 
+
         ./symfony plugin:install --stability=beta sfAlohaPlugin
 
   * Or install the plugin (via Git, which is the preferred way):
 
+
         git clone git@github.com:michaelperrin/sfAlohaPlugin.git plugins/sfAlohaPlugin
 
   * Activate the plugin in `config/ProjectConfiguration.class.php`
+
 
     class ProjectConfiguration extends sfProjectConfiguration
     {
@@ -47,10 +46,10 @@ Aloha plugins are included to save the content and upload pictures. The plugin c
 
   * Activate module in your app's settings file (e.g `apps/frontend/config/settings.yml`)
 
+
     all:
       .settings:
         # ...
-
         enabled_modules:
           # ...
           - sfAlohaContent
@@ -58,18 +57,22 @@ Aloha plugins are included to save the content and upload pictures. The plugin c
 
   * Rebuild the model
 
+
         ./symfony doctrine:build-model
         ./symfony doctrine:build-sql
 
   * Update database tables (Beware! All tables will be deleted and created again from scratch):
 
+
         ./symfony doctrine:insert-sql
 
   * Publish plugin assets
 
+
         ./symfony plugin:publish-assets
 
   * Clear symfony cache
+
 
         ./symfony cc
 
@@ -134,6 +137,7 @@ You can override these parameters in your application ``app.yml`` file (e.g. in 
 
 * In a template, render the content
 
+
     <?php use_helper('Aloha'); ?>
     <?php echo aloha_init_page(); ?>
     <?php echo aloha_render_element('My Content'); ?>
@@ -147,6 +151,7 @@ You can override these parameters in your application ``app.yml`` file (e.g. in 
     ./symfony aloha:create-content "My content"
 
 * In a template, render the content
+
 
     <?php use_helper('Aloha'); ?>
     <?php echo aloha_init_page(); ?>
