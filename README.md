@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This plugin makes it very easy to turn any HTML element within a template into an editable WYSIWYG field using Aloha Editor.
+This symfony 1.4 plugin makes it very easy to turn any HTML element within a template into an editable WYSIWYG field using Aloha Editor.
 Aloha plugins are included to save the content and upload pictures. The plugin can therefore be used to turn a symfony application into a very basic CMS.
 
 
@@ -132,24 +132,24 @@ You can override these parameters in your application ``app.yml`` file (e.g. in 
 
 ### With autoAdd
 
-  * In a template, render the content
+* In a template, render the content
 
     <?php use_helper('Aloha'); ?>
     <?php echo aloha_init_page(); ?>
     <?php echo aloha_render_element('My Content'); ?>
 
-   * If the "My content" element is already existing in the database, an editable div element will be rendered with the existing content inside, or it will be created with empty content
+* If the "My content" element is already existing in the database, an editable div element will be rendered with the existing content inside, or it will be created with empty content
 
 ### Without autoAdd
 
-  * Execute ("My content" is an arbitrary name that will be used to easily identify content. It's like a title which won't be displayed)
+* Execute ("My content" is an arbitrary name that will be used to easily identify content. It's like a title which won't be displayed)
 
-        ./symfony aloha:create-content "My content"
+    ./symfony aloha:create-content "My content"
 
-  * In a template, render the content
+* In a template, render the content
 
     <?php use_helper('Aloha'); ?>
     <?php echo aloha_init_page(); ?>
     <?php echo aloha_render_element('My Content'); ?>
 
-  * Now you can test your page, hover the mouse cursor on the div element, edit it, and click the save button in the Aloha editor toolbar :)
+* Now you can test your page, hover the mouse cursor on the div element, edit it, and click the save button in the Aloha editor toolbar :)
